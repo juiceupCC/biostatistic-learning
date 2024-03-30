@@ -1,0 +1,24 @@
+ # Load necessary libraries
+library(ggplot2)
+
+ # Load the mtcars dataset
+data(mtcars)
+
+ # Convert the cylinder count to a factor for clearer categorization in the plot
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+ # Creating the box-and-whisker plot
+ggplot(mtcars, aes(x = cyl, y = mpg, fill = cyl)) + 
+  geom_boxplot() + 
+  geom_jitter(width = 0.2, size = 2, color = "blue", alpha = 0.5) +
+  scale_fill_brewer(palette = "Pastel1") +
+  theme_minimal() +
+  labs(title = "MPG Distribution Across Car Cylinders",
+       x = "Number of Cylinders",
+       y = "Miles Per Gallon (MPG)",
+       fill = "Cylinders") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "none") # Adjusting title and removing legend for clarity
+
+ # Display the plot
+ggsave("mpg_cylinders_boxplot.png")
